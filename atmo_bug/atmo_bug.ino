@@ -2,16 +2,10 @@
 #include <PubSubClient.h>
 #include <Wire.h>
 #include <Adafruit_HDC1000.h>
+#include "secrets.h"
 
 // 3 Digit ID; Unique per device
 const char* atmo_bug_id = "000";
-
-const char* wifi_ssid     = "";
-const char* wifi_password = "";
-const char* mqtt_server = "";
-
-const char* mqtt_user = "";
-const char* mqtt_password = "";
 
 char* mqtt_client_name = "atmo_bug_XXX";
 char* mqtt_temp_topic = "atmo_bug/temperature/XXX";
@@ -53,9 +47,9 @@ void setup() {
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
-  Serial.println(wifi_ssid);
+  Serial.println(WIFI_SSID);
 
-  WiFi.begin(wifi_ssid, wifi_password);
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -67,7 +61,7 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
 
-  client.setServer(mqtt_server, 1883);
+  client.setServer(MQTT_SERVER, 1883);
   client.setCallback(callback);
 }
 
@@ -106,7 +100,7 @@ void reconnect() {
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    if (client.connect(mqtt_client_name, mqtt_user, mqtt_password)) {
+    if (client.connect(mqtt_client_name, MQTT_USER, MQTT_PASSWORD)) {
       Serial.println("connected");
       // Once connected, publish an announcement...
       client.publish("outTopic", "hello world");
