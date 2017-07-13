@@ -51,5 +51,6 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-libraries/secrets/secrets.h
+libraries/secrets/secrets_data.cpp
 atmo_bug/build
+door_bug/build
