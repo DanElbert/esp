@@ -54,3 +54,4 @@ dkms.conf
 libraries/secrets/secrets_data.cpp
 atmo_bug/build
 door_bug/build
+bbq_bug/build
