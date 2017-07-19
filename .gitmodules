@@ -16,9 +16,9 @@
 [submodule "libraries/Adafruit_GFX"]
 	path = libraries/Adafruit_GFX
 	url = git@github.com:adafruit/Adafruit-GFX-Library.git
-[submodule "libraries/MAX31850_OneWire"]
-	path = libraries/MAX31850_OneWire
-	url = git@github.com:adafruit/MAX31850_OneWire.git
 [submodule "libraries/MAX31850_DallasTemp"]
 	path = libraries/MAX31850_DallasTemp
 	url = git@github.com:adafruit/MAX31850_DallasTemp.git
+[submodule "libraries/OneWire"]
+	path = libraries/OneWire
+	url = git@github.com:PaulStoffregen/OneWire.git
