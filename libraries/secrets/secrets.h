@@ -1,5 +1,5 @@
-#ifndef secrets_h
-#define secrets_h
+#ifndef Secrets_h
+#define Secrets_h
 
 #include "Arduino.h"
 
@@ -15,6 +15,7 @@ public:
   const char* getWifiSsid();
   const char* getWifiPassword();
   const char* getMqttServer();
+  int getMqttPort();
   const char* getMqttUser();
   const char* getMqttPassword();
 private:

@@ -1,4 +1,4 @@
-#include "secrets.h"
+#include "Secrets.h"
 
 const char* Secrets::DEFAULT_BUG_ID = "999";
 
@@ -16,6 +16,10 @@ const char* Secrets::getWifiPassword() {
 
 const char* Secrets::getMqttServer() {
   return MQTT_SERVER;
+}
+
+int Secrets::getMqttPort() {
+  return MQTT_PORT;
 }
 
 const char* Secrets::getMqttUser() {

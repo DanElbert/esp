@@ -1,4 +1,4 @@
-#include "timer.h"
+#include "Timer.h"
 
 Timer::Timer(long usDelay) {
   _usDelay = (unsigned long)usDelay;

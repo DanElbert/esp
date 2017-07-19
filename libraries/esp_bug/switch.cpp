@@ -1,4 +1,4 @@
-#include "switch.h"
+#include "Switch.h"
 
 Switch::Switch(int pin, long usDelay) : _timer(usDelay), _pin(pin), _state(LOW), _waiting(false) {
 }
