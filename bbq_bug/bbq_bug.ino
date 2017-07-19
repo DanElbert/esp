@@ -11,7 +11,8 @@
 #include <PubSubClient.h>
 #include <secrets.h>
 #include <esp_bug.h>
-#include "tempSensors.h"
+#include "TempSensors.h"
+#include "BatterySensor.h"
 
 const char* current_version = "bbq_bug-0.0.1";
 char message[50] = "Starting...";
@@ -22,6 +23,7 @@ char message[50] = "Starting...";
 Adafruit_SSD1306 display(OLED_RESET);
 OneWire oneWire(ONE_WIRE_BUS);
 TempSensors tempSensors(&oneWire);
+BatterySensor battery;
 
 int pinState = 0;
 Timer blinkTimer(1000000);
@@ -29,8 +31,6 @@ Timer disTimer(250000);
 
 void updateDisplay();
 void writeMessage();
-int convertBattery(int);
-int readAdc();
 
 void setup() {
   Serial.begin(115200);
@@ -80,9 +80,6 @@ void updateDisplay() {
   display.clearDisplay();
   display.setCursor(0,0);
 
-  int rawBatt = readAdc();
-
-  int battmV = convertBattery(rawBatt);
   float temp1 = tempSensors.getTemp1();
   float temp2 = tempSensors.getTemp2();
 
@@ -98,23 +95,14 @@ void updateDisplay() {
 
   display.write('\n');
 
-  itoa(battmV, message, 10);
+  itoa(battery.readBatteryMillivolts(), message, 10);
+  writeMessage();
+
+  display.write(' ');
+  itoa(battery.readPercent(), message, 10);
   writeMessage();
 
   display.display();
-}
-
-// Given batter reading from adc, conver to real mV (based on voltage divider values)
-int convertBattery(int mv) {
-  // voltage divider: R1=320K, R2=100K.  4.2V BATT = 1.0V @ ADC
-  return (mv * 4200) / 1000;
-}
-
-// Returns mV from given ADC input pin
-int readAdc() {
-  // The raw value ranges from 0 for 0.0V to 1023 for 1.0V
-  int raw = analogRead(A0);
-  return (raw * 1000) / 1023;
 }
 
 void writeMessage() {
