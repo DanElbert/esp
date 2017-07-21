@@ -2,11 +2,12 @@
 #define Display_h
 
 #include "Arduino.h"
+#include "ESP8266WiFi.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_SSD1306.h"
 #include "TempSensors.h"
 #include "BatterySensor.h"
-#include "timer.h"
+#include "Timer.h"
 
 class Display {
 public:
@@ -26,6 +27,8 @@ private:
   void writeBuffer(char* buffer);
   void writeFloat(float value, int precision);
   void writeInt(int value);
+  void drawBattery();
+  void drawWiFi();
 };
 
 #endif

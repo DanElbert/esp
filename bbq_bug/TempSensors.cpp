@@ -13,9 +13,6 @@ TempSensors::TempSensors(OneWire* oneWire):
 void TempSensors::begin() {
   _sensors.begin();
 
-  Serial.print("device count: ");
-  Serial.println(_sensors.getDeviceCount(), DEC);
-
   _sensors.getAddress(_one.address, 0);
   _sensors.getAddress(_two.address, 1);
 

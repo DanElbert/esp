@@ -1,7 +1,7 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-#include "timer.h"
+#include "Timer.h"
 
 class Switch {
   public:

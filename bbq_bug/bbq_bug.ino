@@ -19,7 +19,7 @@
 #define ONE_WIRE_BUS 12
 
 const char* type = "bbq_bug";
-const char* version = "0.0.1";
+const char* version = "0.0.5";
 
 Adafruit_SSD1306 oled(OLED_RESET);
 OneWire oneWire(ONE_WIRE_BUS);
@@ -40,6 +40,7 @@ void setup() {
   pinMode(0, OUTPUT);
   digitalWrite(0, LOW);
 
+  espBug.begin();
   tempSensors.begin();
   display.begin();
 
@@ -48,6 +49,7 @@ void setup() {
 
 
 void loop() {
+  espBug.update();
   tempSensors.update();
   display.update();
 

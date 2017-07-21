@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "OneWire.h"
 #include "DallasTemperature.h"
-#include "timer.h"
+#include "Timer.h"
 
 struct TempSensor {
   TempSensor(int conversionWait) :

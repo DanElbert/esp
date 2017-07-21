@@ -1,6 +1,14 @@
 #ifndef ESP_BUG_H
 #define ESP_BUG_H
 
+#define DEBUG
+
+#ifdef DEBUG
+# define DEBUG_PRINT(x) do { Serial.println(x); } while(0)
+#else
+# define DEBUG_PRINT(x) do { } while(0)
+#endif
+
 #include "Arduino.h"
 #include "ESP8266WiFi.h"
 #include "ESP8266HTTPClient.h"
@@ -17,6 +25,7 @@ public:
   void buildMqttTopic(char* topic, char* name);
   void begin();
   void update();
+  void mqttCallback(char* topic, byte* payload, unsigned int length);
 private:
   WiFiClient _wifi;
   PubSubClient _mqtt;
@@ -30,11 +39,15 @@ private:
   char _mqtt_announce_topic[30];
   char _mqtt_ping_topic[30];
   char _mqtt_update_topic[30];
+  char _messageBuffer[75];
+  bool _shouldUpdate;
 
-  static void mqttCallback(char* topic, byte* payload, unsigned int length);
   void mqttReconnect();
 };
 
 static EspBug* GLOBAL_ESP_BUG;
+static void GLOBAL_MQTT_CALLBACK(char* topic, byte* payload, unsigned int length) {
+  GLOBAL_ESP_BUG->mqttCallback(topic, payload, length);
+}
 
 #endif
