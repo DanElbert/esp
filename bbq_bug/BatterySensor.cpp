@@ -1,11 +1,12 @@
 #include "BatterySensor.h"
 
-BatterySensor::BatterySensor() {
-
+BatterySensor::BatterySensor() :
+  _readingBuffer(5)
+{
 }
 
-int BatterySensor::readQuartile() {
-  return 0;
+void BatterySensor::update() {
+  _readingBuffer.add(analogRead(A0));
 }
 
 int BatterySensor::readPercent() {
@@ -26,5 +27,5 @@ int BatterySensor::readRawMillivolts() {
 }
 
 int BatterySensor::readRawAdc() {
-  return analogRead(A0);
+  return _readingBuffer.average();
 }

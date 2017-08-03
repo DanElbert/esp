@@ -14,6 +14,7 @@
 #include "ESP8266HTTPClient.h"
 #include "ESP8266httpUpdate.h"
 #include "PubSubClient.h"
+#include "RingArray.h"
 #include "Timer.h"
 #include "Switch.h"
 #include "Secrets.h"
@@ -26,6 +27,7 @@ public:
   void begin();
   void update();
   void mqttCallback(char* topic, byte* payload, unsigned int length);
+  void mqttPublish(char* topic, char* message);
 private:
   WiFiClient _wifi;
   PubSubClient _mqtt;

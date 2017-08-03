@@ -101,6 +101,10 @@ void EspBug::update() {
   }
 }
 
+void EspBug::mqttPublish(char* topic, char* message) {
+  _mqtt.publish(topic, message);
+}
+
 void EspBug::insertBugId(char* str) {
   char* subStr = strstr(str, "XXX");
 
