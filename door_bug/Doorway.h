@@ -2,8 +2,7 @@
 #define Doorway_h
 
 #include "Arduino.h"
-#include "PubSubClient.h"
-#include "esp_bug.h"
+#include "EspBug.h"
 
 enum DoorwayState {
   DoorwayStateClear,
@@ -19,14 +18,14 @@ enum DoorwayDirection {
 
 class Doorway {
   public:
-    Doorway(int sensor1Pin, int sensor2Pin, PubSubClient* mqtt, char* topic);
+    Doorway(int sensor1Pin, int sensor2Pin, EspBug* espBug, char* topic);
     void loop();
   private:
     void setDirection(DoorwayDirection dir);
     void doorCrossed();
-    const int DEBOUNCE_MICROS = 500;
-    const int MIN_THRESHOLD_MICROS = 100000;
-    PubSubClient* _mqtt;
+    const int DEBOUNCE_MICROS = 5000;
+    const int MIN_THRESHOLD_MICROS = 75000;
+    EspBug* _espBug;
     char* _topic;
     Switch _sensor1;
     Switch _sensor2;
@@ -35,6 +34,7 @@ class Doorway {
     DoorwayState _state;
     DoorwayDirection _direction;
     Timer _crossingTimer;
+
 };
 
 #endif

@@ -1,13 +1,13 @@
 #include "Doorway.h"
 
-Doorway::Doorway(int sensor1Pin, int sensor2Pin, PubSubClient* mqtt, char* topic):
+Doorway::Doorway(int sensor1Pin, int sensor2Pin, EspBug* espBug, char* topic):
   _sensor1(sensor1Pin, DEBOUNCE_MICROS),
   _sensor2(sensor2Pin, DEBOUNCE_MICROS),
   _state(DoorwayStateClear),
   _direction(DoorwayDirectionEnter),
   _enterSensor(&_sensor1),
   _exitSensor(&_sensor2),
-  _mqtt(mqtt),
+  _espBug(espBug),
   _topic(topic),
   _crossingTimer(MIN_THRESHOLD_MICROS)
 {
@@ -29,9 +29,9 @@ void Doorway::setDirection(DoorwayDirection dir) {
 void Doorway::doorCrossed() {
   if (_crossingTimer.tock()) {
     if (_direction == DoorwayDirectionEnter) {
-      _mqtt->publish(_topic, "-1");
+      _espBug->mqttPublish(_topic, "-1");
     } else {
-      _mqtt->publish(_topic, "1");
+      _espBug->mqttPublish(_topic, "1");
     }
   }
 }
