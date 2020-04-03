@@ -1,7 +1,7 @@
 #ifndef ESP_BUG_H
 #define ESP_BUG_H
 
-#define DEBUG
+#define DEBUG 1
 
 #ifdef DEBUG
 # define DEBUG_PRINT(x) do { Serial.println(x); } while(0)

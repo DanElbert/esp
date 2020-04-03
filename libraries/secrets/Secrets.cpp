@@ -2,8 +2,16 @@
 
 const char* Secrets::DEFAULT_BUG_ID = "999";
 
-const char* Secrets::getUpdateUrl() {
-  return UPDATE_URL;
+const char* Secrets::getUpdateHost() {
+  return UPDATE_HOST;
+}
+
+const char* Secrets::getUpdatePath() {
+  return UPDATE_PATH;
+}
+
+int Secrets::getUpdatePort() {
+  return UPDATE_PORT;
 }
 
 const char* Secrets::getWifiSsid() {

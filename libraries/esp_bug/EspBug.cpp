@@ -80,11 +80,13 @@ void EspBug::update() {
 
   if (_shouldUpdate) {
     _mqtt.publish(_mqtt_announce_topic, "checking for updates...");
-    t_httpUpdate_return ret = ESPhttpUpdate.update(_secrets->getUpdateUrl(), _full_version);
+    _mqtt.disconnect();
+    //t_httpUpdate_return ret = ESPhttpUpdate.update(_wifi, "10.0.0.50", 4040, "/esp_update", _full_version); // 
+    t_httpUpdate_return ret = ESPhttpUpdate.update(_wifi, _secrets->getUpdateHost(), _secrets->getUpdatePort(), _secrets->getUpdatePath(), _full_version);
 
     switch(ret) {
         case HTTP_UPDATE_FAILED:
-            Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
+            Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
             break;
 
         case HTTP_UPDATE_NO_UPDATES:
