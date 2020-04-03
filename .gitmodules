@@ -22,3 +22,6 @@
 [submodule "libraries/OneWire"]
 	path = libraries/OneWire
 	url = git@github.com:PaulStoffregen/OneWire.git
+[submodule "libraries/Adafruit_SHT31"]
+	path = libraries/Adafruit_SHT31
+	url = https://github.com/adafruit/Adafruit_SHT31.git
